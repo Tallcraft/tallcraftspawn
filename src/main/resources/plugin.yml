@@ -1,0 +1,37 @@
+name: TallcraftSpawn
+version: ${project.version}
+main: com.tallcraft.tallcraftspawn.TallcraftSpawn
+prefix: TallcraftSpawn
+authors: [Tallcraft]
+description: Simple spawn plugin
+website: https://tallcraft.com
+api-version: 1.13
+commands:
+  setspawn:
+    description: Set world /spawn location to current position
+    usage: /setspawn
+    permission: tallcraftspawn.setspawn
+    permission-message: You don't have permission.
+  spawn:
+    description: Teleport to world spawn
+    usage: /spawn
+    permission: tallcraftspawn.spawn
+    permission-message: You don't have permission.
+    aliases: [hub]
+permissions:
+  tallcraftspawn.*:
+    description: Gives access to all TallcraftSpawn commands
+    default: op
+    children:
+      tallcraftspawn.all: true
+  tallcraftspawn.all:
+    description: Gives access to all TallcraftSpawn commands
+    children:
+      tallcraftspawn.spawn: true
+      tallcraftspawn.setspawn: true
+  tallcraftspawn.spawn:
+    description: Allows player to use /spawn
+    default: true
+  tallcraftspawn.setspawn:
+    description: Allows player to set spawn
+    default: false
