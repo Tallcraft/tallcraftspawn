@@ -2,6 +2,7 @@ package com.tallcraft.tallcraftspawn;
 
 
 import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -64,7 +65,7 @@ public final class TallcraftSpawn extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(final PlayerRespawnEvent e) {
-        if(e.isBedSpawn() && !config.getBoolean("overrideBedSpawn")) {
+        if (e.isBedSpawn() && !config.getBoolean("overrideBedSpawn")) {
             return;
         }
         World world = e.getRespawnLocation().getWorld();
@@ -99,7 +100,7 @@ public final class TallcraftSpawn extends JavaPlugin implements Listener {
         double x = config.getDouble(path + ".x");
         double y = config.getDouble(path + ".y");
         double z = config.getDouble(path + ".z");
-        float yaw = (float)config.getDouble(path + ".yaw");
+        float yaw = (float) config.getDouble(path + ".yaw");
         float pitch = (float) config.getDouble(path + ".pitch");
         return new Location(world, x, y, z, yaw, pitch);
     }
@@ -113,15 +114,15 @@ public final class TallcraftSpawn extends JavaPlugin implements Listener {
 
         defaultConfig.set("overrideBedSpawn", false);
 
-        for(World world : worlds) {
+        for (World world : worlds) {
             Location defaultLocation = world.getSpawnLocation();
 
             String path = "spawn.worlds." + world.getName();
             defaultConfig.set(path + ".x", defaultLocation.getX());
             defaultConfig.set(path + ".y", defaultLocation.getY());
             defaultConfig.set(path + ".z", defaultLocation.getZ());
-            defaultConfig.set(path + ".yaw" , 0f);
-            defaultConfig.set(path + ".pitch" , 0f);
+            defaultConfig.set(path + ".yaw", 0f);
+            defaultConfig.set(path + ".pitch", 0f);
         }
 
         config.setDefaults(defaultConfig);
