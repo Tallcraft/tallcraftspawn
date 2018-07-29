@@ -72,9 +72,17 @@ public final class TallcraftSpawn extends JavaPlugin implements Listener {
         e.setRespawnLocation(getSpawnLocation(world));
     }
 
-
     private void toSpawn(Player player) {
-        World world = player.getWorld();
+        this.toSpawn(player, config.getBoolean("globalSpawn"));
+    }
+
+    private void toSpawn(Player player, boolean toDefaultWorld) {
+        World world;
+        if(toDefaultWorld) {
+            world = Bukkit.getWorlds().get(0);
+        } else {
+            world = player.getWorld();
+        }
         Location location = getSpawnLocation(world);
         player.teleport(location);
     }
@@ -110,6 +118,7 @@ public final class TallcraftSpawn extends JavaPlugin implements Listener {
         MemoryConfiguration defaultConfig = new MemoryConfiguration();
 
         defaultConfig.set("overrideBedSpawn", false);
+        defaultConfig.set("globalSpawn", true);
 
         for (World world : worlds) {
             Location defaultLocation = world.getSpawnLocation();
