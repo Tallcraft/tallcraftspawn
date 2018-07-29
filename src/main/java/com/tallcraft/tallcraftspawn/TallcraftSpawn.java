@@ -76,15 +76,12 @@ public final class TallcraftSpawn extends JavaPlugin implements Listener {
     private void toSpawn(Player player) {
         World world = player.getWorld();
         Location location = getSpawnLocation(world);
-        logger.info(location.toString());
         player.teleport(location);
     }
 
     private void setSpawn(Location location) {
         // Also set vanilla world spawn
         location.getWorld().setSpawnLocation(location);
-
-        logger.info(location.toString());
 
         String path = "spawn.worlds." + location.getWorld().getName();
         config.set(path + ".x", location.getX());
