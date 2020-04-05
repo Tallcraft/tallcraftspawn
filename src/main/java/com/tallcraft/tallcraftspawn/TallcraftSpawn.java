@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -70,6 +71,15 @@ public final class TallcraftSpawn extends JavaPlugin implements Listener {
         }
         World world = e.getRespawnLocation().getWorld();
         e.setRespawnLocation(getSpawnLocation(world));
+    }
+
+    @EventHandler
+    public void onPlayerJoin(final PlayerJoinEvent event) {
+        // Teleport player to the spawn on first join
+        Player player = event.getPlayer();
+        if(!player.hasPlayedBefore()) {
+            this.toSpawn(player, true);
+        }
     }
 
     private void toSpawn(Player player) {
